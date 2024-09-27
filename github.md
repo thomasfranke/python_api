@@ -1,5 +1,6 @@
 # Documentação Básica do Git
 
+Aviso: nunca faça commit na main. Crie branches para as atualizações.
 
 ## Criando uma Nova Branch
 
@@ -38,3 +39,8 @@ git branch
 Mudar para uma branch existente: Para alternar entre branches, execute o comando:
 
 git checkout nome-da-branch
+
+## Atualizando repositório local com a main
+
+git checkout main
+git pull origin main

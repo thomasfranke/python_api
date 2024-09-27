@@ -27,3 +27,4 @@ python myproject/manage.py migrate
 python myproject/manage.py startapp novoapp
 
 
+Para desativar o servidor: control + c
