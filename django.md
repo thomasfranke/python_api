@@ -25,3 +25,5 @@ python myproject/manage.py migrate
 # Criar novo app:
 
 python myproject/manage.py startapp novoapp
+
+
