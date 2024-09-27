@@ -24,7 +24,8 @@ python myproject/manage.py migrate
 
 # Criar novo app:
 
-python myproject/manage.py startapp novoapp
+cd myproject
+python manage.py startapp novoapp
 
 
 Para desativar o servidor: control + c
