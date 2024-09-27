@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('crud1/', include('crud1.urls')),
     path('endpoints/', include('endpoints.urls')),
+    path('api/', include('api.urls')),
 ]
