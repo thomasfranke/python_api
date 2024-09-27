@@ -27,7 +27,7 @@ git push origin nome-da-branch
 
 ## Criando uma Pull Request (PR)
 
-Depois de concluir suas alterações e enviar a branch para o repositório remoto, crie uma Pull Request (PR) para que suas mudanças possam ser revisadas e mescladas na branch principal.
+Depois de concluir suas alterações e enviar a branch para o repositório remoto, crie uma Pull Request (PR) para que suas mudanças possam ser revisadas e mescladas na branch principal. Isso pode ser feito pelo próprio GitHub.
 
 ## Gerenciando Branches
 
