@@ -10,3 +10,8 @@ Inicialize o servidor:
 
 python myproject/manage.py runserver
 
+Abra o navegador nesse link:
+
+http://127.0.0.1:8000/
+
+Para desativar o servidor: control + c
