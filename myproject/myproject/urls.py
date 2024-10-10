@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from Enderecos import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('crud1/', include('crud1.urls')),
     path('endpoints/', include('endpoints.urls')),
     path('api/', include('api.urls')),
+    path('enderecos/', include('Enderecos.urls'))
+
 ]

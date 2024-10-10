@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crud1',
     'endpoints',
     'api',
+    'Enderecos'
 ]
 
 MIDDLEWARE = [
@@ -88,6 +89,21 @@ DATABASES = {
         # 'PORT' : 3306
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'mssql',
+#         'NAME': 'tche-orienta',  # Nome do seu banco de dados
+#         'USER': 'UserTche',  # Deixe vazio para usar a autenticação do Azure AD
+#         'PASSWORD': 'TcheSenha123',  # Deixe vazio para usar a autenticação do Azure AD
+#         'HOST': 'tcp:tche-serve.database.windows.net,1433',  # Servidor SQL
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 17 for SQL Server',  # Driver ODBC correto para SQL Server
+#             'authentication': 'ActiveDirectoryDefault',  # Autenticação via Azure AD
+#             'encrypt': True,
+#             'TrustServerCertificate': False,
+#         },
+#     }
+# }
 
 
 # Password validation

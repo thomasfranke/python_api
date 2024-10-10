@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Endereços</title>
+</head>
+<body>
+    <h1>Endereços Cadastrados</h1>
+    <ul>
+        {% for endereco in enderecos %}
+            <li>
+                ID: {{ endereco.id }} - {{ endereco.cep }} - {{ endereco.rua }}, {{ endereco.numero }} {% if endereco.complemento %} - {{ endereco.complemento }} {% endif %}
+                <a href="{% url 'atualizar_endereco' endereco.pk %}">Atualizar</a>  <!-- Link para atualizar o endereço -->
+                <a href="{% url 'deletar_endereco' endereco.pk %}">Deletar</a>  <!-- Link para deletar o endereço -->
+            </li>
+        {% empty %}
+            <li>Nenhum endereço cadastrado.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'criar_endereco' %}">Criar Novo Endereço</a>
+</body>
+</html>
