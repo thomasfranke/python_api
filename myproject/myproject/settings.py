@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'crud1',
     'endpoints',
     'api',
-    'Enderecos'
+    'Enderecos',
+    'autenticacao'
 ]
 
 MIDDLEWARE = [

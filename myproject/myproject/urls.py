@@ -23,6 +23,6 @@ urlpatterns = [
     path('crud1/', include('crud1.urls')),
     path('endpoints/', include('endpoints.urls')),
     path('api/', include('api.urls')),
-    path('enderecos/', include('Enderecos.urls'))
-
+    path('enderecos/', include('Enderecos.urls')),
+    path('autenticacao/', include('autenticacao.urls'))
 ]
