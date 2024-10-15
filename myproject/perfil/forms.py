@@ -1,7 +1,7 @@
 from django import forms
-from .models import Endereco
+from .models import Perfil
 
-class EnderecoForm(forms.ModelForm):
+class PerfilForm(forms.ModelForm):
     class Meta:
-        model = Endereco
-        fields = ['cep', 'rua', 'numero', 'complemento']  # Campos que você quer no formulário
+        model = Perfil
+        fields = ['nome', 'email', 'descricao']

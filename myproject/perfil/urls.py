@@ -1,7 +1,7 @@
 from django.urls import path
-from . views import ver_perfil_view, editar_perfil_view
+from . import views
 
 urlpatterns = [
-    path('perfil/<int:id>/', ver_perfil_view, name='ver_perfil'),
-    path('perfil/editar/', editar_perfil_view, name='editar_perfil'),
+    path('<int:id>/', views.ver_perfil, name='ver_perfil'),
+    path('editar/', views.editar_perfil, name='editar_perfil'),
 ]
