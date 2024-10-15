@@ -6,9 +6,16 @@ Aviso: nunca faça commit na main. Crie branches para as atualizações.
 
 Antes de iniciar qualquer alteração, crie uma branch específica para suas modificações. Use o seguinte comando:
 
+git pull origin main => carrega a main atualizada
 git checkout -b nome-da-branch
 
 Esse comando cria uma nova branch e muda automaticamente para ela.
+
+Caso já tenha sido feita alguma alteração no projeto, não será possível criar uma branch. Então se faz um stash para armazenar as alterações em uma pasta temporária:
+
+git stash => salva todas alterações em uma pasta temporária
+git checkout -b nome-da-branch => cria a branch e abre ela
+git stash pop => pega todas alterações de volta
 
 ## Fazendo Commits
 
