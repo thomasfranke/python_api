@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'endpoints',
     'api',
     'Enderecos',
-    'Perfil'
+    'Perfil',
 ]
 
 MIDDLEWARE = [

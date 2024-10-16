@@ -1,6 +1,5 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Perfil
-from .forms import PerfilForm
+from django.shortcuts import render, get_object_or_404
+from . models import Perfil
 
 # View para exibir o perfil do usuário
 def ver_perfil(request, id):
