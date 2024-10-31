@@ -17,12 +17,11 @@ class CadastroViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        
         token = AccessToken.for_user(user)
-        
         return Response({
             'token': str(token),
         }, status=status.HTTP_201_CREATED)
+        
 class AutenticarViewSet(viewsets.ViewSet):
     def create(self, request):
         serializer = AutenticarSerializer(data=request.data)
@@ -30,7 +29,6 @@ class AutenticarViewSet(viewsets.ViewSet):
 
         user = User.objects.filter(username=serializer.validated_data['username']).first()
         if user and user.check_password(serializer.validated_data['password']):
-            # Gera o token para o usuário autenticado
             token = AccessToken.for_user(user)
             return Response({
                 'message': 'Usuário autenticado com sucesso!',
@@ -41,7 +39,7 @@ class AutenticarViewSet(viewsets.ViewSet):
         return Response({'error': 'Credenciais inválidas.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class StatusViewSet(viewsets.ViewSet):
-    permission_classes = [IsAuthenticated]
+    [IsAuthenticated]
 
     def list(self, request):
         user = request.user
