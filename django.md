@@ -14,6 +14,15 @@ Abra o navegador nesse link:
 
 http://127.0.0.1:8000/
 
+## Autenticacao:
+
+POST: http://127.0.0.1:8000/autenticacao/autenticar/
+Body: {
+    "username": "thomas1",
+    "password": "123456"
+}
+
+
 Para desativar o servidor: control + c
 
 # Fazer Migrações:
