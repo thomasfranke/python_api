@@ -53,8 +53,20 @@ Endpoint simples para checagem de autenticação, para validar o API Token:
 - Método: GET
 
 Parâmetros:
-- Bearer Token: enviar o API Token que foi armazenado de forma segura
+- Cabeçalho: Authorization: token <api-token>
 
+Repostas / Status Codes:
 - 200: Usuário Autenticado com sucesso
 - 401: Não autorizado
     -- Autenticação feita de forma correta
+
+### Logout:
+
+- URL: /autenticacao/logout/
+- Método: POST
+
+Parâmetros:
+- Bearer Token: enviar o API Token que foi armazenado de forma segura
+
+- 200: Usuário deslogado com sucesso
+- 401: Erro no logout / usuário já estava deslogado
