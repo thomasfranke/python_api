@@ -5,7 +5,7 @@ Para rodar o servidor local, consulte a documentação python.py
 
 - Endpoints começam com a url do servidor, no localhost é:
 
-http://127.0.0.1:8000/api/
+http://127.0.0.1:8000
 
 # Autenticação:
 
