@@ -25,8 +25,9 @@ urlpatterns = [
     path('enderecos/', include('Enderecos.urls')),
     path('autenticacao/', include('autenticacao.urls')),
     path('estabelecimento/', include('estabelecimento.urls')),
-    path('categorias/', include('categorias.urls'))
+    path('categorias/', include('categorias.urls')),
+    path('perfil/', include('perfil.urls'))
 ]
 
-if settings.DEBUG:  # Apenas em modo de desenvolvimento
+if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
