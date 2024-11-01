@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 
 from .serializers import AutenticarSerializer
 from .serializers import CadastroSerializer
-from rest_framework_simplejwt.tokens import AccessToken
+from perfil.models import Perfil
+
 
 from rest_framework import viewsets, status
 from rest_framework.authtoken.models import Token
@@ -17,6 +18,22 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+# class CadastroViewSet(viewsets.ModelViewSet):
+#     queryset = User.objects.none()
+#     serializer_class = CadastroSerializer
+#     permission_classes = [AllowAny]
+
+#     def create(self, request):
+#         serializer = self.get_serializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         user = serializer.save()
+        
+#         token, created = Token.objects.get_or_create(user=user)
+
+#         return Response({
+#             'token': str(token),
+#         }, status=status.HTTP_201_CREATED)
+
 class CadastroViewSet(viewsets.ModelViewSet):
     queryset = User.objects.none()
     serializer_class = CadastroSerializer
@@ -26,12 +43,14 @@ class CadastroViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        
+        Perfil.objects.create(usuario=user)
+
         token, created = Token.objects.get_or_create(user=user)
 
         return Response({
             'token': str(token),
         }, status=status.HTTP_201_CREATED)
+
         
 class AutenticarViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
@@ -66,7 +85,7 @@ class LogoutViewSet(viewsets.ViewSet):
 
     def create(self, request):
         try:
-            token = Token.objects.get(user=request.user)
+            token = Token.objects.get(usuario=request.user)
             token.delete()
             return Response({
                 'message': 'Logout realizado com sucesso!'
