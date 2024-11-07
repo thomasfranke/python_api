@@ -18,22 +18,6 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-# class CadastroViewSet(viewsets.ModelViewSet):
-#     queryset = User.objects.none()
-#     serializer_class = CadastroSerializer
-#     permission_classes = [AllowAny]
-
-#     def create(self, request):
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         user = serializer.save()
-        
-#         token, created = Token.objects.get_or_create(user=user)
-
-#         return Response({
-#             'token': str(token),
-#         }, status=status.HTTP_201_CREATED)
-
 class CadastroViewSet(viewsets.ModelViewSet):
     queryset = User.objects.none()
     serializer_class = CadastroSerializer
