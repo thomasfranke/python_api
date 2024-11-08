@@ -37,17 +37,24 @@
 
                 const responseBody = await response.json();
 
+<<<<<<< Updated upstream
                 if (response.status === 201) {
                     
                     console.log('Body da resposta:', responseBody);
-                    document.getElementById('responseMessage').innerText = 'Login bem-sucedido!';
+                    document.getElementById('responseMessage').innerText = 'Sucesso: ' + JSON.stringify(responseBody);
+=======
+                if (response.status === 200) {
+                    
+                    console.log('Body da resposta:', responseBody);
+                    document.getElementById('responseMessage').innerText = 'Usuário logado: ' + JSON.stringify(responseBody);
 
+>>>>>>> Stashed changes
                 } else {
-                    document.getElementById('responseMessage').innerText = 'Falha no Login: ' + JSON.stringify(responseBody);
+                    document.getElementById('responseMessage').innerText = 'Usuário não logado: ' + JSON.stringify(responseBody);
                 }
             } catch (error) {
                 console.error('Erro na requisição:', error);
-                document.getElementById('responseMessage').innerText = 'Ocorreu um erro. Tente novamente mais tarde.';
+                document.getElementById('responseMessage').innerText = 'Servidor fora do ar. Reinicie o servidor com o comando: python manage.py runserver';
             }
         });
     </script>

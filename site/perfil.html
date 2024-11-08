@@ -33,7 +33,7 @@
                 }
             } catch (error) {
                 console.error('Erro ao verificar status:', error);
-                document.getElementById('responseMessage').innerText = 'Erro ao tentar verificar o status. Tente novamente mais tarde.';
+                document.getElementById('responseMessage').innerText = 'Servidor fora do ar. Reinicie o servidor com o comando: python manage.py runserver';
             }
         }
 
