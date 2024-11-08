@@ -27,7 +27,6 @@
             const password = document.getElementById('password').value;
 
             try {
-                // Envia a requisição POST
                 const response = await fetch('http://127.0.0.1:8000/autenticacao/cadastro/', {
                     method: 'POST',
                     headers: {

@@ -34,12 +34,14 @@
                     },
                     body: JSON.stringify({ username, password })
                 });
-                
+
                 const responseBody = await response.json();
 
                 if (response.status === 201) {
+                    
                     console.log('Body da resposta:', responseBody);
-                    document.getElementById('responseMessage').innerText = 'Sucesso: ' + JSON.stringify(responseBody);
+                    document.getElementById('responseMessage').innerText = 'Login bem-sucedido!';
+
                 } else {
                     document.getElementById('responseMessage').innerText = 'Falha no Login: ' + JSON.stringify(responseBody);
                 }
