@@ -1,0 +1,16 @@
+<h1>{{ estabelecimento.nome }}</h1>
+<p>{{ estabelecimento.descricao }}</p>
+
+<h2>Avaliações</h2>
+{% for avaliacao in avaliacoes %}
+    <p><strong>{{ avaliacao.usuario.username }}</strong> - {{ avaliacao.nota }}/5</p>
+    <p>{{ avaliacao.comentario }}</p>
+    {% if avaliacao.usuario == request.user %}
+        <a href="{% url 'avaliacao:editar_avaliacao' avaliacao.id %}">Editar</a>
+        <a href="{% url 'avaliacao:excluir_avaliacao' avaliacao.id %}">Excluir</a>
+    {% endif %}
+{% empty %}
+    <p>Este estabelecimento ainda não tem avaliações.</p>
+{% endfor %}
+
+<a href="{% url 'avaliacao:adicionar_avaliacao' estabelecimento.id %}">Adicionar Avaliação</a>
