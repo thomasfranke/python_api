@@ -19,14 +19,16 @@ from django.urls import include, path
 from Enderecos import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('enderecos/', include('Enderecos.urls')),
     path('autenticacao/', include('autenticacao.urls')),
+    path('enderecos/', include('Enderecos.urls')),
     path('estabelecimento/', include('estabelecimento.urls')),
     path('categorias/', include('categorias.urls')),
-    path('perfil/', include('perfil.urls'))
+    path('perfil/', include('perfil.urls')),
+    path('avaliacao/', include('avaliacao.urls')),
 ]
 
 if settings.DEBUG:

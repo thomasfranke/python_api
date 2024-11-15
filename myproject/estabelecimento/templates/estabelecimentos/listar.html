@@ -6,6 +6,7 @@
             {{ estabelecimento.nome }} - {{ estabelecimento.descricao }}
             <a href="{% url 'editar_estabelecimento' estabelecimento.id %}">Editar</a>
             <a href="{% url 'deletar_estabelecimento' estabelecimento.id %}">Deletar</a>
+            <a href="{% url 'avaliacao:adicionar_avaliacao' estabelecimento.id %}">Avaliar</a>
         </li>
     {% endfor %}
 </ul>
