@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Endereço</title>
+</head>
+<body>
+    <h1>Criar Novo Endereço</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Exibe o formulário -->
+        <button type="submit">Salvar</button>
+    </form>
+
+    <h2>Endereços Cadastrados:</h2>
+    <ul>
+        {% for endereco in enderecos %}
+            <li>{{ endereco.cep }} - {{ endereco.rua }}, {{ endereco.numero }} {% if endereco.complemento %} - {{ endereco.complemento }} {% endif %}</li>
+        {% empty %}
+            <li>Nenhum endereço cadastrado.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'enderecos' %}">Voltar</a>  <!-- Certifique-se de que o nome está correto -->
+</body>
+</html>
