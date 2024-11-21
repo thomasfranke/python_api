@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'estabelecimento',
     'categorias',
     'perfil',
+    'avaliacao',
 ]
 
 REST_FRAMEWORK = {
