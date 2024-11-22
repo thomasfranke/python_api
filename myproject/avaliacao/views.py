@@ -4,28 +4,28 @@ from estabelecimento.models import Estabelecimento
 from django.contrib.auth.decorators import login_required
 from .models import Avaliacao, Estabelecimento
 
-
+@login_required
 def adicionar_avaliacao(request, id):
     estabelecimento = get_object_or_404(Estabelecimento, id=id)
-    if request.method == "POST":
+    if request.method == 'POST':
         form = AvaliacaoForm(request.POST)
         if form.is_valid():
             avaliacao = form.save(commit=False)
             avaliacao.estabelecimento = estabelecimento
             avaliacao.usuario = request.user
             avaliacao.save()
-            return redirect('detalhes_estabelecimento', id=id)
+            # Redireciona para os detalhes do estabelecimento
+            return redirect('detalhe_estabelecimento', id=estabelecimento.id)
     else:
         form = AvaliacaoForm()
     
     return render(request, 'avaliacao/avaliacao_form.html', {
         'form': form,
         'estabelecimento': estabelecimento,
-        'range': range(1, 6)  # Adiciona o range de 1 a 5
+        'range': range(1, 6),
     })
 
-
-
+@login_required
 def editar_avaliacao(request, id):
     avaliacao = get_object_or_404(Avaliacao, id=id, usuario=request.user)
     if request.method == 'POST':
@@ -37,7 +37,7 @@ def editar_avaliacao(request, id):
         form = AvaliacaoForm(instance=avaliacao)
     return render(request, 'avaliacao/avaliacao_form.html', {'form': form, 'estabelecimento': avaliacao.estabelecimento})
 
-
+@login_required
 def excluir_avaliacao(request, id):
     avaliacao = get_object_or_404(Avaliacao, id=id, usuario=request.user)
     estabelecimento_id = avaliacao.estabelecimento.id

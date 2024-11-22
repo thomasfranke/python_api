@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Estabelecimento
 from .forms import EstabelecimentoForm  # Adicione um arquivo forms.py para os formulários
+from avaliacao.models import Avaliacao
 
 # Listar estabelecimentos
 def listar_estabelecimentos(request):
@@ -40,8 +41,7 @@ def deletar_estabelecimento(request, id):
 
 def detalhe_estabelecimento(request, id):
     estabelecimento = get_object_or_404(Estabelecimento, id=id)
-    avaliacoes = estabelecimento.avaliacoes.all()
-    return render(request, 'estabelecimento/detalhe_estabelecimento.html', {
+    return render(request, 'estabelecimentos/detalhe_estabelecimento.html', {
         'estabelecimento': estabelecimento,
-        'avaliacoes': avaliacoes,
+        'avaliacoes': estabelecimento.avaliacoes.all(),  # Pega todas as avaliações para exibir
     })

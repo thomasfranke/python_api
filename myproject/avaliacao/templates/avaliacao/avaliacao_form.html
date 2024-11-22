@@ -1,37 +1,7 @@
 <h1>Avaliar {{ estabelecimento.nome }}</h1>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <table>
-        <tr>
-            <td><label for="nota">Nota:</label></td>
-            <td>
-                <select id="nota" name="nota">
-                    {% for i in range %}
-                    <option value="{{ i }}" {% if i == 1 %}selected{% endif %}>{{ i }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-            <td rowspan="2">
-                <button type="submit">Salvar Avaliação</button>
-            </td>
-        </tr>
-        <tr>
-            <td><label for="comentario">Comentário:</label></td>
-            <td>
-                <textarea id="comentario" name="comentario" rows="5" cols="40" placeholder="Deixe seu comentário"></textarea>
-            </td>
-        </tr>
-    </table>
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
 </form>
-
-<script>
-    // Seleciona o campo de comentário e o contador
-    const comentarioInput = document.querySelector('textarea[name="comentario"]');
-    const charCount = document.getElementById('char-count');
-    
-    // Função para atualizar o contador
-    comentarioInput.addEventListener('input', () => {
-        const length = comentarioInput.value.length;
-        charCount.textContent = `${length}/200`;
-    });
-</script>
+<a href="{% url 'detalhe_estabelecimento' estabelecimento.id %}">Voltar</a>

@@ -3,10 +3,10 @@
 <ul>
     {% for estabelecimento in estabelecimentos %}
         <li>
-            {{ estabelecimento.nome }} - {{ estabelecimento.descricao }}
+            {{ estabelecimento.nome }}
             <a href="{% url 'editar_estabelecimento' estabelecimento.id %}">Editar</a>
             <a href="{% url 'deletar_estabelecimento' estabelecimento.id %}">Deletar</a>
-            <a href="{% url 'avaliacao:adicionar_avaliacao' estabelecimento.id %}">Avaliar</a>
+            <a href="{% url 'detalhe_estabelecimento' estabelecimento.id %}">Detalhes</a>
         </li>
     {% endfor %}
 </ul>

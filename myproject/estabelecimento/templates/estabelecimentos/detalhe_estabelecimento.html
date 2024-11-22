@@ -1,16 +1,30 @@
-<h1>{{ estabelecimento.nome }}</h1>
-<p>{{ estabelecimento.descricao }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Estabelecimento</title>
+</head>
+<h1>Detalhes {{ estabelecimento.nome }}</h1>
+<p><strong>Descrição:</strong> {{ estabelecimento.descricao }}</p>
+<p><strong>Endereço:</strong> {{ estabelecimento.endereco }}</p>
+<p><strong>Avaliação Média:</strong> {{ estabelecimento.avaliacao_media }}</p>
+<a href="{% url 'avaliacao:adicionar_avaliacao' estabelecimento.id %}" class="btn btn-primary">Avaliar</a>
 
-<h2>Avaliações</h2>
-{% for avaliacao in avaliacoes %}
-    <p><strong>{{ avaliacao.usuario.username }}</strong> - {{ avaliacao.nota }}/5</p>
-    <p>{{ avaliacao.comentario }}</p>
-    {% if avaliacao.usuario == request.user %}
-        <a href="{% url 'avaliacao:editar_avaliacao' avaliacao.id %}">Editar</a>
-        <a href="{% url 'avaliacao:excluir_avaliacao' avaliacao.id %}">Excluir</a>
-    {% endif %}
-{% empty %}
-    <p>Este estabelecimento ainda não tem avaliações.</p>
-{% endfor %}
-
-<a href="{% url 'avaliacao:adicionar_avaliacao' estabelecimento.id %}">Adicionar Avaliação</a>
+<h2>Avaliações:</h2>
+<ul>
+    {% for avaliacao in avaliacoes %}
+        <li>
+            <strong>Nota:</strong> {{ avaliacao.nota }} <br>
+            <strong>Comentário:</strong> {{ avaliacao.comentario }} <br>
+            <strong>Usuário:</strong> {{ avaliacao.usuario.username }} <br>
+            <strong>Data:</strong> {{ avaliacao.data_criacao }}
+            <a href="{% url 'avaliacao:excluir_avaliacao' avaliacao.id %}">Excluir</a>
+        </li>
+    {% empty %}
+        <p>Sem avaliações para este estabelecimento.</p>
+    {% endfor %}
+</ul>
+    <a href="{% url 'listar_estabelecimentos' %}">Voltar</a>
+</body>
+</html>
