@@ -1,9 +1,10 @@
-from django.urls import path
-from .views import listar_estabelecimentos, criar_estabelecimento, editar_estabelecimento, deletar_estabelecimento
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import EstabelecimentoViewSet
+
+router = DefaultRouter()
+router.register(r'', EstabelecimentoViewSet, basename='estabelecimento')
 
 urlpatterns = [
-    path('', listar_estabelecimentos, name='listar_estabelecimentos'),
-    path('criar/', criar_estabelecimento, name='criar_estabelecimento'),
-    path('editar/<int:id>/', editar_estabelecimento, name='editar_estabelecimento'),
-    path('deletar/<int:id>/', deletar_estabelecimento, name='deletar_estabelecimento'),
+    path('', include(router.urls)),
 ]
