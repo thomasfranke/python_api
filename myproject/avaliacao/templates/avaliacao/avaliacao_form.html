@@ -1,0 +1,25 @@
+<h1>Avaliar {{ estabelecimento.nome }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.nota.label_tag }} {{ form.nota }}
+    
+    {{ form.comentario.label_tag }}
+    {{ form.comentario }}
+    
+    <!-- Contador de caracteres -->
+    <small id="char-count">0/200</small>
+    
+    <button type="submit">Salvar Avaliação</button>
+</form>
+
+<script>
+    // Seleciona o campo de comentário e o contador
+    const comentarioInput = document.querySelector('textarea[name="comentario"]');
+    const charCount = document.getElementById('char-count');
+    
+    // Função para atualizar o contador
+    comentarioInput.addEventListener('input', () => {
+        const length = comentarioInput.value.length;
+        charCount.textContent = `${length}/200`;
+    });
+</script>
