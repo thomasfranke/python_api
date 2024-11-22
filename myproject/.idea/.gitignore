@@ -4,3 +4,25 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+# Arquivos compilados
+*.pyc
+*.pyo
+__pycache__/
+# Configurações sensíveis
+*.env
+# Banco SQLite
+db.sqlite3
+# Logs de execução
+*.log
+# Arquivos temporários
+*.tmp
+*.swp
+*.swo
+# Uploads e mídia gerada pelo usuário
+media/
+# Configurações do VSCode
+.vscode/
+# Configurações do PyCharm
+.idea/
+# Dependências do Python
+venv/
