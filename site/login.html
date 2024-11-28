@@ -37,18 +37,16 @@
 
                 const responseBody = await response.json();
 
-<<<<<<< Updated upstream
+
                 if (response.status === 201) {
                     
                     console.log('Body da resposta:', responseBody);
                     document.getElementById('responseMessage').innerText = 'Sucesso: ' + JSON.stringify(responseBody);
-=======
-                if (response.status === 200) {
+                } else  if (response.status === 200) {
                     
                     console.log('Body da resposta:', responseBody);
                     document.getElementById('responseMessage').innerText = 'Usuário logado: ' + JSON.stringify(responseBody);
 
->>>>>>> Stashed changes
                 } else {
                     document.getElementById('responseMessage').innerText = 'Usuário não logado: ' + JSON.stringify(responseBody);
                 }
