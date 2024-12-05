@@ -4,8 +4,7 @@
 
 Inicialize o ambiente virtual:
 
-source myenv/bin/activate
-
+source env/bin/activate
 
 Inicialize o servidor:
 
