@@ -4,6 +4,7 @@ Aviso: nunca faça commit na main. Crie branches para as atualizações.
 
 ## Criando uma Nova Branch
 
+
 Antes de iniciar qualquer alteração, crie uma branch específica para suas modificações. Use o seguinte comando:
 
 git pull origin main => carrega a main atualizada
