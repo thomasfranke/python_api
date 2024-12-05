@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Formulário de Login</h2>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <button type="submit">Login</button>
+    </form>
+
+    <p id="responseMessage"></p>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/autenticacao/autenticar/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const responseBody = await response.json();
+
+
+                if (response.status === 201) {
+                    
+                    console.log('Body da resposta:', responseBody);
+                    document.getElementById('responseMessage').innerText = 'Sucesso: ' + JSON.stringify(responseBody);
+                } else  if (response.status === 200) {
+                    
+                    console.log('Body da resposta:', responseBody);
+                    document.getElementById('responseMessage').innerText = 'Usuário logado: ' + JSON.stringify(responseBody);
+
+                } else {
+                    document.getElementById('responseMessage').innerText = 'Usuário não logado: ' + JSON.stringify(responseBody);
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                document.getElementById('responseMessage').innerText = 'Servidor fora do ar. Reinicie o servidor com o comando: python manage.py runserver';
+            }
+        });
+    </script>
+</body>
+</html>

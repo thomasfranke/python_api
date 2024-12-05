@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Perfil</title>
+</head>
+<body>
+    <h2>Atualizar Perfil</h2>
+    <form id="loginForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required><br><br>
+
+        <label for="sexo">Sexo:</label>
+        <input type="text" id="sexo" name="sexo" required><br><br>
+
+        <button type="submit">Atualizar Perfil</button>
+    </form>
+
+    <p id="responseMessage"></p>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const token = '0261b7c61c922023552a54fedbf0cff6b6a7bda6'; 
+
+            const nome = document.getElementById('nome').value;
+            const endereco = document.getElementById('endereco').value;
+            const sexo = document.getElementById('sexo').value;
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/perfil/perfil/', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${token}`,
+                    },
+                    body: JSON.stringify({ nome, endereco, sexo })
+                });
+                
+                const responseBody = await response.json();
+
+                if (response.status === 200) {
+                    console.log('Body da resposta:', responseBody);
+                    document.getElementById('responseMessage').innerText = 'Sucesso: ' + JSON.stringify(responseBody);
+                } else {
+                    document.getElementById('responseMessage').innerText = 'Falha: ' + JSON.stringify(responseBody);
+                }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                document.getElementById('responseMessage').innerText = 'Servidor fora do ar. Reinicie o servidor com o comando: python manage.py runserver';
+            }
+        });
+    </script>
+</body>
+</html>

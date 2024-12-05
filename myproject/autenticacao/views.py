@@ -36,8 +36,9 @@ class CadastroViewSet(viewsets.ModelViewSet):
         }, status=status.HTTP_201_CREATED)
 
         
-class AutenticarViewSet(viewsets.ViewSet):
+class AutenticarViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
+    serializer_class = AutenticarSerializer
     def create(self, request):
         serializer = AutenticarSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

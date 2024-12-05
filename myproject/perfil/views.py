@@ -14,6 +14,7 @@ class PerfilViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         perfil = self.get_queryset().first()
+        
 
         if perfil is not None:
             serializer = self.get_serializer(perfil)
