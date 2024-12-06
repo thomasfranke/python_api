@@ -82,6 +82,3 @@ media/
 
 # pipenv
 Pipfile.lock
-
-# Django settings
-settings.py
