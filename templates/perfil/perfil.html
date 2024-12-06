@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+</head>
+<body>
+    <h2>Perfil</h2>
+
+    <p id="responseMessage">Carregando status...</p>
+
+    <script>
+        
+        async function checkStatus() {
+            try {
+                const token = 'XXXXXXXX'; 
+
+                const response = await fetch('http://127.0.0.1:8000/perfil/perfil/', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Token ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const responseBody = await response.json();
+
+                if (response.status === 200) {
+                    document.getElementById('responseMessage').innerText = 'Logado: ' + JSON.stringify(responseBody);
+                } else {
+                    document.getElementById('responseMessage').innerText = 'Usuário não logado: ' + JSON.stringify(responseBody);
+                }
+            } catch (error) {
+                console.error('Erro ao verificar status:', error);
+                document.getElementById('responseMessage').innerText = 'Erro ao tentar verificar o status. Tente novamente mais tarde.';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', checkStatus);
+    </script>
+</body>
+</html>
