@@ -16,19 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+
+from Enderecos import views
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('enderecos/', include('Enderecos.urls')),
     path('autenticacao/', include('autenticacao.urls')),
-    path('estabelecimentos/', include('estabelecimento.urls')),
+    path('enderecos/', include('Enderecos.urls')),
+    path('estabelecimento/', include('estabelecimento.urls')),
     path('categorias/', include('categorias.urls')),
     path('perfil/', include('perfil.urls')),
-    
+    path('avaliacao/', include('avaliacao.urls')),
 ]
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 

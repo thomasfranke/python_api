@@ -1,41 +1,47 @@
-from rest_framework import viewsets, permissions
-from rest_framework.response import Response
-from rest_framework import status
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Estabelecimento
-from .serializers import EstabelecimentoSerializer
+from .forms import EstabelecimentoForm  # Adicione um arquivo forms.py para os formulários
+from avaliacao.models import Avaliacao
 
-class EstabelecimentoViewSet(viewsets.ModelViewSet):
-    queryset = Estabelecimento.objects.all()
-    serializer_class = EstabelecimentoSerializer
-    permission_classes = [permissions.IsAuthenticated]
+# Listar estabelecimentos
+def listar_estabelecimentos(request):
+    estabelecimentos = Estabelecimento.buscar_todos_estabelecimentos()
+    return render(request, 'estabelecimentos/listar.html', {'estabelecimentos': estabelecimentos})
 
-    def get_queryset(self):
-        return Estabelecimento.objects.all().order_by('id')
+# Criar estabelecimento
+def criar_estabelecimento(request):
+    if request.method == 'POST':
+        form = EstabelecimentoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_estabelecimentos')
+    else:
+        form = EstabelecimentoForm()
+    return render(request, 'estabelecimentos/criar.html', {'form': form})
 
-    def listAll(self, request, *args, **kwargs):
-        estabelecimentos = self.get_queryset()
-        serializer = self.get_serializer(estabelecimentos, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+# Editar estabelecimento
+def editar_estabelecimento(request, id):
+    estabelecimento = get_object_or_404(Estabelecimento, id=id)
+    if request.method == 'POST':
+        form = EstabelecimentoForm(request.POST, request.FILES, instance=estabelecimento)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_estabelecimentos')
+    else:
+        form = EstabelecimentoForm(instance=estabelecimento)
+    return render(request, 'estabelecimentos/editar.html', {'form': form})
 
-    def retrieve(self, request, *args, **kwargs):
-        estabelecimento = self.get_object()
-        serializer = self.get_serializer(estabelecimento)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def update(self, request, *args, **kwargs):
-        estabelecimento = self.get_object()
-        serializer = self.get_serializer(estabelecimento, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def destroy(self, request, *args, **kwargs):
-        estabelecimento = self.get_object()
+# Deletar estabelecimento
+def deletar_estabelecimento(request, id):
+    estabelecimento = get_object_or_404(Estabelecimento, id=id)
+    if request.method == 'POST':
         estabelecimento.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return redirect('listar_estabelecimentos')
+    return render(request, 'estabelecimentos/deletar.html', {'estabelecimento': estabelecimento})
+
+def detalhe_estabelecimento(request, id):
+    estabelecimento = get_object_or_404(Estabelecimento, id=id)
+    return render(request, 'estabelecimentos/detalhe_estabelecimento.html', {
+        'estabelecimento': estabelecimento,
+        'avaliacoes': estabelecimento.avaliacoes.all(),  # Pega todas as avaliações para exibir
+    })

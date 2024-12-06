@@ -1,41 +1,42 @@
-from rest_framework import viewsets, permissions
-from rest_framework.response import Response
-from rest_framework import status
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Endereco
-from .serializers import EnderecoSerializer
+from .forms import EnderecoForm
 
-class EnderecoViewSet(viewsets.ModelViewSet):
-    queryset = Endereco.objects.all()
-    serializer_class = EnderecoSerializer
-    permission_classes = [permissions.IsAuthenticated]
+def listar_enderecos_view(request):
+    enderecos = Endereco.objects.all()  # Recupera todos os endereços
+    return render(request, 'enderecos/listar_enderecos.html', {'enderecos': enderecos})
 
-    def get_queryset(self):
-        return Endereco.objects.all().order_by('id')
+def criar_endereco_view(request):
+    if request.method == 'POST':
+        form = EnderecoForm(request.POST)
+        if form.is_valid():
+            form.save()  # Salva o endereço no banco de dados
+            return redirect('enderecos')  # Redireciona para a lista de endereços após o sucesso
+    else:
+        form = EnderecoForm()
 
-    def list(self, request, *args, **kwargs):
-        enderecos = self.get_queryset()
-        serializer = self.get_serializer(enderecos, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    return render(request, 'enderecos/criar_endereco.html', {'form': form})
 
-    def retrieve(self, request, *args, **kwargs):
-        endereco = self.get_object()
-        serializer = self.get_serializer(endereco)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+def atualizar_endereco_view(request, pk):
+    endereco = get_object_or_404(Endereco, pk=pk)  # Obtém o endereço a ser atualizado
+    if request.method == 'POST':
+        form = EnderecoForm(request.POST, instance=endereco)  # Passa a instância do endereço
+        if form.is_valid():
+            form.save()  # Salva as alterações
+            return redirect('enderecos')  # Redireciona para a lista de endereços após a atualização
+    else:
+        form = EnderecoForm(instance=endereco)  # Preenche o formulário com os dados existentes
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return render(request, 'enderecos/atualizar_endereco.html', {'form': form, 'endereco': endereco})
 
-    def update(self, request, *args, **kwargs):
-        endereco = self.get_object()
-        serializer = self.get_serializer(endereco, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+def deletar_endereco_view(request, pk):
+    endereco = get_object_or_404(Endereco, pk=pk)  # Obtém o endereço a ser deletado
+    if request.method == 'POST':
+        endereco.delete()  # Deleta o endereço
+        return redirect('enderecos')  # Redireciona para a lista de endereços após a deleção
 
-    def destroy(self, request, *args, **kwargs):
-        endereco = self.get_object()
-        endereco.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    return render(request, 'enderecos/deletar_endereco.html', {'endereco': endereco})
+
+def obter_endereco_view(request, pk):
+    endereco = get_object_or_404(Endereco, pk=pk)  # Obtém o endereço pelo ID
+    return render(request, 'enderecos/obter_endereco.html', {'endereco': endereco})

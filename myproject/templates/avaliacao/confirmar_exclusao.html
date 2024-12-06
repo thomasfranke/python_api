@@ -1,0 +1,7 @@
+<h1>Excluir Avaliação</h1>
+<p>Tem certeza de que deseja excluir esta avaliação?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Excluir</button>
+</form>
+<a href="{% url 'detalhe_estabelecimento' avaliacao.estabelecimento.id %}">Cancelar</a>
