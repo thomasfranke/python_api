@@ -1,10 +1,10 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import AvaliacaoViewSet
 
-app_name = 'avaliacao'
+router = DefaultRouter()
+router.register(r'', AvaliacaoViewSet, basename='avaliacao')
 
 urlpatterns = [
-    path('adicionar/<int:id>/', views.adicionar_avaliacao, name='adicionar_avaliacao'),
-    path('<int:id>/editar/', views.editar_avaliacao, name='editar_avaliacao'),
-    path('<int:id>/excluir/', views.excluir_avaliacao, name='excluir_avaliacao'),
+    path('', include(router.urls)),
 ]

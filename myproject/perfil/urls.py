@@ -8,7 +8,6 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
-
 router = DefaultRouter()
 router.register(r'', PerfilViewSet, basename='')
 

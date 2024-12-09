@@ -1,7 +1,0 @@
-<h1>Deletar Estabelecimento</h1>
-<p>Você tem certeza que deseja deletar {{ estabelecimento.nome }}?</p>
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit">Deletar</button>
-</form>
-<a href="{% url 'listar_estabelecimentos' %}">Cancelar</a>

@@ -1,9 +1,11 @@
-from django.urls import path
-from . import views
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import CategoriaViewSet
+
+router = DefaultRouter()
+router.register(r'categorias', CategoriaViewSet, basename='categoria')
 
 urlpatterns = [
-    path('', views.listar_categorias, name='listar_categorias'),
-    path('nova/', views.criar_categoria, name='criar_categoria'),
-    path('editar/<int:id>/', views.editar_categoria, name='editar_categoria'),
-    path('excluir/<int:id>/', views.excluir_categoria, name='excluir_categoria'),
+    # Outras rotas do seu projeto
+    path('', include(router.urls)),
 ]

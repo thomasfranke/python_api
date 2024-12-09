@@ -2,8 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 
-from .serializers import AutenticarSerializer
-from .serializers import CadastroSerializer
+from .serializers import AutenticarSerializer, CadastroSerializer, StatusSerializer, LogoutSerializer
 from perfil.models import Perfil
 
 
@@ -14,7 +13,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 
 from django.contrib.auth import get_user_model
-
 
 User = get_user_model()
 
@@ -56,6 +54,7 @@ class AutenticarViewSet(viewsets.ModelViewSet):
 
 
 class StatusViewSet(viewsets.ViewSet):
+    serializer_class = StatusSerializer
     permission_classes = [IsAuthenticated]
 
     def list(self, request):
@@ -66,6 +65,7 @@ class StatusViewSet(viewsets.ViewSet):
         }, status=status.HTTP_200_OK)
         
 class LogoutViewSet(viewsets.ViewSet):
+    serializer_class = LogoutSerializer
     permission_classes = [IsAuthenticated]
 
     def create(self, request):

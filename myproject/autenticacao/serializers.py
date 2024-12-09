@@ -3,7 +3,11 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-# Serializers
+class LogoutSerializer(serializers.Serializer):
+    pass
+class StatusSerializer(serializers.Serializer):
+    pass
+
 class CadastroSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

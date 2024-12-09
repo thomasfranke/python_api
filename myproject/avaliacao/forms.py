@@ -6,6 +6,6 @@ class AvaliacaoForm(forms.ModelForm):
         model = Avaliacao
         fields = ['nota', 'comentario']
         widgets = {
-            'nota': forms.NumberInput(attrs={'min': 1, 'max': 5, 'step': 1}),
-            'comentario': forms.Textarea(attrs={'maxlength': 200}),
+            'nota': forms.Select(choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')], attrs={'class': 'form-control'}),
+            'comentario': forms.Textarea(attrs={'maxlength': 200, 'placeholder': 'Deixe seu comentário', 'class': 'form-control'}),
         }

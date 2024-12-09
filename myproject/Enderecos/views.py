@@ -39,3 +39,7 @@ class EnderecoViewSet(viewsets.ModelViewSet):
         endereco = self.get_object()
         endereco.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+def obter_endereco_view(request, pk):
+    endereco = get_object_or_404(Endereco, pk=pk)  # Obtém o endereço pelo ID
+    return render(request, 'enderecos/obter_endereco.html', {'endereco': endereco})
