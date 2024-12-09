@@ -47,7 +47,8 @@ class AutenticarViewSet(viewsets.ModelViewSet):
             return Response({
                 'message': 'Usuário autenticado com sucesso!',
                 'username': user.username,
-                'token': str(token)
+                'token': str(token),
+                'id': user.id,
             }, status=status.HTTP_200_OK)
 
         return Response({'error': 'Credenciais inválidas.'}, status=status.HTTP_401_UNAUTHORIZED)
