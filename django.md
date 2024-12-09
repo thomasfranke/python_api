@@ -28,14 +28,21 @@ Inicialize o servidor:
 python myproject/manage.py makemigrations
 python myproject/manage.py migrate 
 python myproject/manage.py runserver
+python manage.py runserver
 
 Abra o navegador nesse link:
 
 http://127.0.0.1:8000/
 
+# Reset Migrations:
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+
 
 # Fazer Migrações:
 
+- Se não estiver criando a tabela:
+python manage.py makemigrations perfil --empty
+python manage.py makemigrations <tabela> --empty
 
 python myproject/manage.py makemigrations
 python myproject/manage.py migrate 
