@@ -10,6 +10,9 @@ from drf_spectacular.views import (
 
 router = DefaultRouter()
 router.register(r'', PerfilViewSet, basename='')
+from django.urls import path
+from .views import PerfilViewSet
+
 
 urlpatterns = [
     path('', include(router.urls)), 
