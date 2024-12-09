@@ -1,10 +1,11 @@
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404, render
 from rest_framework import status
 from .models import Endereco
 from .serializers import EnderecoSerializer
 
-class EnderecoViewSet(viewsets.ModelViewSet):
+class EnderecoViewSet(viewsets.ViewSet):
     queryset = Endereco.objects.all()
     serializer_class = EnderecoSerializer
     permission_classes = [permissions.IsAuthenticated]
