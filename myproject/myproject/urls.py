@@ -27,7 +27,6 @@ urlpatterns = [
     path('categorias/', include('categorias.urls')),
     path('perfil/', include('perfil.urls')),
     path('avaliacao/', include('avaliacao.urls')),
-    
 ]
 
 if settings.DEBUG:
